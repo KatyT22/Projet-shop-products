@@ -1,4 +1,4 @@
-package com.alten.shop.api.config;
+package com.project.shop.api.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

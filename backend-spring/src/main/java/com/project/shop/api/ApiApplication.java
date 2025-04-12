@@ -1,4 +1,4 @@
-package com.alten.shop.api;
+package com.project.shop.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
