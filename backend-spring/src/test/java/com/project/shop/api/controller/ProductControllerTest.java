@@ -1,6 +1,6 @@
-package com.alten.shop.api.controller;
-import com.alten.shop.api.model.Product;
-import com.alten.shop.api.service.ProductService;
+package com.project.shop.api.controller;
+import com.project.shop.api.model.Product;
+import com.project.shop.api.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

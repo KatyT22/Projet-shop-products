@@ -1,7 +1,7 @@
-package com.alten.shop.api.service;
+package com.project.shop.api.service;
 
-import com.alten.shop.api.model.Product;
-import com.alten.shop.api.repository.ProductRepository;
+import com.project.shop.api.model.Product;
+import com.project.shop.api.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

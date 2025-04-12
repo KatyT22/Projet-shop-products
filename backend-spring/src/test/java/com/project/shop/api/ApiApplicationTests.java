@@ -1,4 +1,4 @@
-package com.alten.shop.api;
+package com.project.shop.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
