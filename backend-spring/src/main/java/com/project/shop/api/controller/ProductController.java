@@ -1,7 +1,7 @@
-package com.alten.shop.api.controller;
+package com.project.shop.api.controller;
 
-import com.alten.shop.api.model.Product;
-import com.alten.shop.api.service.ProductService;
+import com.project.shop.api.model.Product;
+import com.project.shop.api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

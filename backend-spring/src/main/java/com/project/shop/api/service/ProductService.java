@@ -1,6 +1,6 @@
-package com.alten.shop.api.service;
+package com.project.shop.api.service;
 
-import com.alten.shop.api.model.Product;
+import com.project.shop.api.model.Product;
 
 import java.util.List;
 import java.util.Optional;
