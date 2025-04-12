@@ -1,4 +1,4 @@
-package com.alten.shop.api.model;
+package com.project.shop.api.model;
 
 import jakarta.persistence.*;
 import lombok.*;
