@@ -1,6 +1,6 @@
 <div class="sidenav" [class.expanded]="sidenavService.getExpanded()"
     (mouseover)="sidenavService.setExpanded(true)"
-    (mouseleave)="sidenavService.setExpanded(false)"> 
+    (mouseleave)="sidenavService.setExpanded(false)">
     <i class="pi pi-bookmark pinned-icon"
         *ngIf="!sidenavService.getMobileDisplay()"
         [class.active]="sidenavService.getPinned()"
@@ -10,9 +10,9 @@
     <div class="title-container" [routerLink]="'/'">
         <img src="favicon.ico" height="25">
         <div class="title"data-expanded-only>
-            <span class="first">Alten Shop</span>
+            <span class="first">Project Shop</span>
         </div>
-    </div>   
+    </div>
     <ul>
         <li *ngFor="let item of sidenavItems" [class.router-link-active]="rla.isActive">
             <div class="li-container"

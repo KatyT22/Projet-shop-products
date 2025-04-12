@@ -4,8 +4,40 @@
 #
 # For IE 9-11 support, please remove 'not' from the last line of the file and adjust as needed
 
-> 0.5%
-last 2 versions
-Firefox ESR
-not dead
-IE 9-11
+#command to list supported browsers : npx browserslist
+and_chr 135
+and_ff 137
+and_qq 14.9
+and_uc 15.5
+android 135
+chrome 135
+chrome 134
+chrome 133
+chrome 132
+chrome 131
+chrome 109
+edge 135
+edge 134
+edge 133
+firefox 137
+firefox 136
+firefox 102
+ie 11
+ie 10
+ie 9
+ios_saf 18.4
+ios_saf 18.3
+ios_saf 18.1
+ios_saf 17.6-17.7
+ios_saf 16.6-16.7
+ios_saf 15.6-15.8
+kaios 3.0-3.1
+kaios 2.5
+op_mini all
+op_mob 80
+opera 117
+opera 116
+safari 18.4
+safari 18.3
+samsung 27
+samsung 26
