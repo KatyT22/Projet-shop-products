@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     /**
-     * Create a new products
+     * Create a new product
      * @param productBody
      * @return product
      */
