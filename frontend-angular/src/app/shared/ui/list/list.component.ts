@@ -34,7 +34,7 @@ export class ListComponent<T> implements OnInit {
   @Input() public readonly totalRecords: number;
   @Input() public readonly listItemTemplate!: TemplateRef<unknown>;
   @Input() public readonly gridItemTemplate!: TemplateRef<unknown>;
-  @Input() public readonly sortOptions: SelectItem[];
+  @Input() public sortOptions: SelectItem[];
   @Input() public readonly layout: 'grid' | 'list' = 'grid';
   @Input() public readonly enableAdd: boolean; // can add item from list
   @Input() public readonly enableDateRange: boolean; // can filter by date range
@@ -69,6 +69,10 @@ export class ListComponent<T> implements OnInit {
 
   ngOnInit(): void {
     this.searchParams = this.listService.getSearchConfig(this.listKey, this.sortKey);
+
+  
+
+    console.log("list component "+ this.sortOptions.map(value => value.label));
 
     this.primengConfig.ripple = true;
 
