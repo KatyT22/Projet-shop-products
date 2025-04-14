@@ -12,12 +12,16 @@ export class ProductsService {
     private http = inject(HttpClient);
 
     
+
+
+
+
     //Get product list
     getProducts(): Observable<Product[]> {
         if( ProductsService.productslist.length == 0 )
         {
             this.http.get<Product[]>('http://localhost:8080/api/products').subscribe(data => {
-                //console.log(data);
+                console.log(" Service => " + data);
                 ProductsService.productslist = data;
                 
                 this.products$.next(ProductsService.productslist);
@@ -84,4 +88,5 @@ export class ProductsService {
         })
         return this.products$;
     }
+
 }
