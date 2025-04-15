@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
 import { PrimeNG } from 'primeng/config';
-
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductsComponent],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  //styleUrl: './app.component.scss'
 })
 
 

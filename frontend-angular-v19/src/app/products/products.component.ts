@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DataView } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { CommonModule } from '@angular/common';
-import { ProductsService } from './products.service';
+import { ProductsService } from '../service/products.service';
 import { Product } from './product.model';
 import { Observable } from 'rxjs';
 

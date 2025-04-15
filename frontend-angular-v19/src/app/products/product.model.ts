@@ -15,3 +15,4 @@ export class Product {
     products: Product[];
     total: number;
   }
+
