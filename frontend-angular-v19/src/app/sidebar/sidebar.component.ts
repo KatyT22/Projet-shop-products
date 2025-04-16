@@ -3,11 +3,12 @@ import { ProductsComponent } from '../products/products.component';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 @Component({
   selector: 'app-sidebar',
-  imports: [ProductsComponent, MenuModule, CommonModule],
+  imports: [ProductsComponent, DashboardComponent, MenuModule, CommonModule],
   templateUrl: './sidebar.component.html',
 })
 

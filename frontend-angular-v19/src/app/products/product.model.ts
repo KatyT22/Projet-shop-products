@@ -5,7 +5,7 @@ export class Product {
     description?:string;
     price?:number;
     quantity?:number;
-    inventoryStatus?:string;
+    inventoryStatus? : string;
     category?:string;
     image?:string;
     rating?:number;
