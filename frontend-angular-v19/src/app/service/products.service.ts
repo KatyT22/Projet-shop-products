@@ -6,7 +6,7 @@ import { Product } from '../products/product.model';
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
 
-    private static productslist: Product[] = [];
+    public static productslist: Product[] = [];
     private products$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
     private http = inject(HttpClient);
@@ -18,10 +18,10 @@ export class ProductsService {
 
     //Get product list
     getProducts(): Observable<Product[]> {
-        if( ProductsService.productslist.length == 0 )
+        if( !ProductsService.productslist || ProductsService.productslist.length == 0 )
         {
             this.http.get<Product[]>('http://localhost:8080/api/products').subscribe(data => {
-                console.log(" Service => " + data);
+                //console.log(" Service => " + data);
                 ProductsService.productslist = data;
                 
                 this.products$.next(ProductsService.productslist);
@@ -47,9 +47,9 @@ export class ProductsService {
 
     //Update a product 
     update(product: Product): Observable<Product[]>{
-        this.http.patch<Product>('http://localhost:8080/api/products/'+ product.id, product).subscribe(data => {
-            console.log(data);
+        
             ProductsService.productslist.forEach(element => {
+                
                 if(element.id == product.id)
                 {
                     element.name = product.name;
@@ -61,8 +61,15 @@ export class ProductsService {
                     element.price = product.price;
                     element.quantity = product.quantity;
                     element.rating = product.rating;
+
+                    
+                    if(product.id){
+                        this.delete(product.id);
+                    }
+                    this.create(element);
                 }
-            });
+            
+
             this.products$.next(ProductsService.productslist);
         })
         

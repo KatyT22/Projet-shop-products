@@ -26,17 +26,11 @@ export class ProductsComponent{
     }
 
     ngOnInit() {
-        //this.productsService.getProducts().then((data) => (this.products = data));
-       /* this.productsService.getProducts().then((data) => {
-            const d = data.slice(0, 5);
-            this.products.set([...d]);
-            console.log( " Products Component oninit => "+ this.products)
-        });*/
+
         this.products$ = this.productsService.getProducts();
         
         this.products$.subscribe(data => {
-            this.products = data,
-            console.log( " Products Component oninit => "+ data)
+            this.products = data
         });
         
     }

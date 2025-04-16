@@ -11,8 +11,4 @@ export class Product {
     rating?:number;
   }
   
-  export interface ProductPayload {
-    products: Product[];
-    total: number;
-  }
 

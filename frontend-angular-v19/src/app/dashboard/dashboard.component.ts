@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
@@ -47,7 +47,7 @@ interface ExportColumn {
   styleUrl: './dashboard.component.scss',
   providers: [ProductsService, MessageService, ConfirmationService]
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnChanges{
 
   products! : Product[];
   statuses!: SelectItem[];
@@ -58,25 +58,23 @@ export class DashboardComponent implements OnInit{
   products$! : Observable<Product[]>;
   cols!: Column[];
   exportColumns!: ExportColumn[];
-  inventoryStatus! : string;
 
   constructor(
     private productsService: ProductsService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
     private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit(){
     this.products$ = this.productsService.getProducts();
+        
     this.products$.subscribe(data => {
-      this.products = data,
-      this.ref.markForCheck();
-      console.log( " Doashboard Component oninit => "+ data)
+        this.products = data
     });
-    /*this.productsService.getProducts().then((data) => {
-      this.products = data;
-      
-   });*/
+    this.ref.markForCheck();
+    this.products = ProductsService.productslist;
+
 
     this.statuses = [
         { label : 'INSTOCK', value : 'instock'}, 
@@ -93,6 +91,16 @@ export class DashboardComponent implements OnInit{
     ];
 
     this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.products$ = this.productsService.getProducts();
+        
+    this.products$.subscribe(data => {
+        this.products = data
+    });
+
+    this.products = ProductsService.productslist;
   }
 
 
@@ -137,10 +145,34 @@ export class DashboardComponent implements OnInit{
   }
 
   editProduct(product: Product){
+    //product.inventoryStatus = this.mapInventoryStatusReverse(product.inventoryStatus);
+    //this.products$ = this.productsService.update(product);
+    //console.log("product.id " + product.id! + "; this.product.id " + this.product.id!);
+    this.product = { ...product };
+    this.productDialog = true;
+
     console.log("Edit PRoduct");
   }
 
-  deleteProduct(product_id : number){
+  deleteProduct(product : Product){
+    
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + product.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+          this.products = this.products.filter((val) => val.id !== product.id);
+          this.productsService.delete(product.id!);
+          this.product = {};
+          this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Product Deleted',
+              life: 3000
+          });
+      }
+    });
+    this.products = ProductsService.productslist;
     console.log("Delete PRoduct");
   }
 
@@ -189,38 +221,71 @@ export class DashboardComponent implements OnInit{
     return _status;
   }
 
+ /* mapInventoryStatusReverse(status : string) : any {
+    let _element : any = {label : '', value : ''};
+    switch (status) {
+      case 'INSTOCK':
+        _element.label = 'INSTOCK';
+        _element.value = 'instock';
+        break;
+      case 'LOWSTOCK':
+        _element.label = 'LOWSTOCK';
+        _element.value = 'lowstock';
+        break;
+      case 'OUTOFSTOCK':
+        _element.label = 'OUTOFSTOCK';
+        _element.value = 'outofstock';
+        break;
+      default:
+        break;
+      }
+    return _element;
+  }*/
+
+  getRandomInt(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
   saveProduct(product : Product) {
     this.submitted = true;
-    product.inventoryStatus = this.mapInventoryStatus(this.product);
-    if (product.name?.trim()) {
-        if (product.id) {
-            //this.products[this.findIndexById(product.id)] = product;
-            this.productsService.update(product);
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Successful',
-                detail: 'Product Updated',
-                life: 3000
-            });
-        } else {
-          
-            product.code = this.createCode();
-            product.image = 'image';
-            product.rating = 0;
-            //this.products.push(product);
-            this.productsService.create(product);
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Successful',
-                detail: 'Product Created',
-                life: 3000
-            });
+    if(product){
+      product.inventoryStatus = this.mapInventoryStatus(product);
+      if (product.name?.trim()) {
+          if (product.id) {
+              this.products[this.findIndexById(product.id)] = product;
+              this.productsService.update(product);
+              this.messageService.add({
+                  severity: 'success',
+                  summary: 'Successful',
+                  detail: 'Product Updated',
+                  life: 3000
+              });
+          } else {
+            
+              product.code = this.createCode();
+              product.image = 't-shirt.jpg';
+              product.rating = this.getRandomInt(1,5);
+              
+              
+              this.productsService.create(product);
+              //this.products.push(product);
+              this.messageService.add({
+                  severity: 'success',
+                  summary: 'Successful',
+                  detail: 'Product Created',
+                  life: 3000
+              });
+          }
         }
-
-        this.products = [...this.products];
-        this.productDialog = false;
-        this.product = {};
+          
+          this.products = ProductsService.productslist;
+          this.product = {};
+          this.productDialog = false;
+          
+        
+      }
     }
-  }
-}
 
+  }
