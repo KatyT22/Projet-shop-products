@@ -1,4 +1,4 @@
-# Back-end
+# Projet Shop
 
 back-end permettant la gestion de produits définis plus bas. 
 
