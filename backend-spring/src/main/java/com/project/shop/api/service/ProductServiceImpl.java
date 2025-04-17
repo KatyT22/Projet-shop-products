@@ -24,23 +24,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
         return productRepository
-                .save(new Product(product.getId(), product.getCode(), product.getName(), product.getDescription(), product.getPrice(), product.getQuantity(), product.getInventoryStatus(), product.getCategory(), product.getImage(), product.getRating()));
+                .save(new Product(null, product.getCode(), product.getName(), product.getDescription(), product.getPrice(), product.getQuantity(), product.getInventoryStatus(), product.getCategory(), product.getImage(), product.getRating()));
     }
 
     @Override
-    public Optional<Product> getProductById(long id) {
+    public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public Product updateProduct(long id, Product productBody) {
+    public Product updateProduct(Long id, Product productBody) {
         Optional<Product> p = productRepository.findById(id);
 
         return p.map(product -> productRepository.save(editProduct(productBody, product))).orElse(null);
     }
 
     @Override
-    public void deleteProduct(long id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 

@@ -1,7 +1,7 @@
-package com.alten.shop.api.service;
+package com.project.shop.api.service;
 
-import com.alten.shop.api.model.Operator;
-import com.alten.shop.api.repository.OperatorRepository;
+import com.project.shop.api.model.Operator;
+import com.project.shop.api.repository.OperatorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

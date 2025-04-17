@@ -26,7 +26,7 @@ public class ProductServiceTest {
 
     @BeforeEach
     public void startTest(){
-        Product product = new Product(153, "code_152", "product_1", "Description_product_1", 10f, 10, "INSTOCK", "Stuff", "product1.jpg", 5);
+        Product product = new Product(153L, "code_152", "product_1", "Description_product_1", 10f, 10, "INSTOCK", "Stuff", "product1.jpg", 5);
         products = new ArrayList<Product>();
         products.add(product);
     }
@@ -40,5 +40,7 @@ public class ProductServiceTest {
         //Assert
         assertEquals(results.getFirst(), products.getFirst());
     }
+
+
 
 }

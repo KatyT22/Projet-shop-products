@@ -1,6 +1,6 @@
-package com.alten.shop.api.service;
+package com.project.shop.api.service;
 
-import com.alten.shop.api.model.Operator;
+import com.project.shop.api.model.Operator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
