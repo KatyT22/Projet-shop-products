@@ -49,6 +49,8 @@ interface ExportColumn {
 })
 export class DashboardComponent implements OnInit, OnChanges{
 
+  
+
   products! : Product[];
   statuses!: SelectItem[];
   submitted: boolean = false;
@@ -251,7 +253,7 @@ export class DashboardComponent implements OnInit, OnChanges{
   saveProduct(product : Product) {
     this.submitted = true;
     if(product){
-      product.inventoryStatus = this.mapInventoryStatus(product);
+      //product.inventoryStatus = this.mapInventoryStatus(product);
       if (product.name?.trim()) {
           if (product.id) {
               this.products[this.findIndexById(product.id)] = product;

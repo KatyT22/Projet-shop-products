@@ -11,7 +11,7 @@ export class ProductsService {
 
     private http = inject(HttpClient);
 
-    
+    private backendRoot: string = 'http://localhost:8080/api/products/';
 
 
 
@@ -20,8 +20,8 @@ export class ProductsService {
     getProducts(): Observable<Product[]> {
         if( !ProductsService.productslist || ProductsService.productslist.length == 0 )
         {
-            this.http.get<Product[]>('http://localhost:8080/api/products').subscribe(data => {
-                //console.log(" Service => " + data);
+            this.http.get<Product[]>(this.backendRoot).subscribe(data => {
+                console.log(' Service => ' + data);
                 ProductsService.productslist = data;
                 
                 this.products$.next(ProductsService.productslist);
@@ -37,7 +37,7 @@ export class ProductsService {
 
     //Create new product
     create(product: Product): Observable<Product[]> {
-        this.http.post<Product>('http://localhost:8080/api/products/new', product).subscribe(data => {
+        this.http.post<Product>(this.backendRoot+'/new', product).subscribe(data => {
             console.log(data);
             ProductsService.productslist.push(product);
             this.products$.next(ProductsService.productslist);
@@ -78,7 +78,7 @@ export class ProductsService {
 
     // Get a product
     getProduct(id: number): Observable<Product[]>{
-        this.http.get<Product>('http://localhost:8080/api/products/' + id).subscribe(data => {
+        this.http.get<Product>(this.backendRoot+ id).subscribe(data => {
             console.log(data);
             ProductsService.productslist = ProductsService.productslist.filter(value => { return value.id !== id } );
             this.products$.next(ProductsService.productslist);
@@ -88,7 +88,7 @@ export class ProductsService {
 
     // Delete a product
     delete(id: number): Observable<Product[]>{
-        this.http.delete<Product>('http://localhost:8080/api/products/' + id).subscribe(data => {
+        this.http.delete<Product>(this.backendRoot + id).subscribe(data => {
             console.log(data);
             ProductsService.productslist = ProductsService.productslist.filter(value => { return value.id !== id } );
             this.products$.next(ProductsService.productslist);
